@@ -1,0 +1,28 @@
+server:
+  port: 80
+  servlet:
+    # 모든 Servlet Container 에는 default Servlet 이라는게 등록되어 있다.
+    # 실제로 tomcat 을 설치한 다음 conf 디렉토리 하위의 web.xml 을 열어보면 default Servlet 이 등록되어 있는것을 확인할 수 있다.
+    register-default-servlet: true  
+
+
+spring:
+  # mustache:
+  #   prefix: classpath:/templates/mustache/
+  #   suffix: 
+
+  freemarker:
+    suffix: .ftl
+    template-loader-path: classpath:/templates
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+    static-path-pattern: /res/**   
+  web:
+    resources:
+      static-locations: 
+        - classpath:/static/ 
+        - classpath:/public/ 
+
+      #add-mappings: false
