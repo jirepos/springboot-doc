@@ -1,9 +1,13 @@
 server:
   port: 80
+  error:
+    whitelabel:
+      enabled: false
   servlet:
     # 모든 Servlet Container 에는 default Servlet 이라는게 등록되어 있다.
     # 실제로 tomcat 을 설치한 다음 conf 디렉토리 하위의 web.xml 을 열어보면 default Servlet 이 등록되어 있는것을 확인할 수 있다.
     register-default-servlet: true  
+
 
 
 spring:
@@ -26,3 +30,17 @@ spring:
         - classpath:/public/ 
 
       #add-mappings: false
+
+
+# /api-docs endpoint custom path
+# springdoc.api-docs.path=/api-docs  
+# swagger-ui custom path
+# springdoc.swagger-ui.path=/swagger-ui.html
+# Disabling the /v3/api-docs endpoint
+# springdoc.api-docs.enabled=false
+# springdoc:
+#   api-docs:
+#     path: /api-docs
+#   swagger-ui:
+#     path: /swagger-ui.html
+

@@ -9,7 +9,6 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 @Configuration
 public class DispatcherConfig implements WebMvcConfigurer {
 
-
     public void configureDefaultServletHandling(
         org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer configurer) {
       configurer.enable();
@@ -23,6 +22,8 @@ public class DispatcherConfig implements WebMvcConfigurer {
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     // url을 지정하여 실제 리소스 경로를 설정 
     // registry.addResourceHandler("/public/**").addResourceLocations("classpath:/public/", "classpath:/static/");// .setCachePeriod(0);
+    // registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+    // registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     registry.addResourceHandler("/public/**").addResourceLocations("classpath:/public/");// .setCachePeriod(0);
     registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");// .setCachePeriod(0);
   }
