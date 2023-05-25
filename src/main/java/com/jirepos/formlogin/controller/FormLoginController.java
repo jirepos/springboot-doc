@@ -1,6 +1,5 @@
 package com.jirepos.formlogin.controller;
 
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -40,8 +39,6 @@ public class FormLoginController {
         // .defaultSuccessUrl("/home", true); // 로그인 인증을 성공하면 이동하는 페이지를 등록한다. true 설정을 해 주어야 동작
         return "home.mustache";
     }
-
-
 
     /** 로그인 실패 페이지*/
     @GetMapping("/login-fail")

@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jirepos</groupId>
-	<artifactId>spring-doc</artifactId>
+	<artifactId>springboot3-security6-doc</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>spring-doc-demo</name>
-	<description>SpringDoc Demo Project </description>
+	<name>spring-security-doc</name>
+	<description>Demo Project for SpringBoot3.1, Spring Security 6.1.0 , SpringDoc </description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-doc.version>2.1.0</spring-doc.version>
@@ -41,6 +41,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.experimental/spring-aot-maven-plugin -->
+		<!-- <dependency>
+				<groupId>org.springframework.experimental</groupId>
+				<artifactId>spring-aot-maven-plugin</artifactId>
+				<version>0.12.1</version>
+		</dependency> -->
+
+
 
 		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -103,6 +112,28 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			
+			<!-- <plugin>
+						<groupId>org.graalvm.nativeimage</groupId>
+						<artifactId>native-image-maven-plugin</artifactId>
+						<version>20.2.0</version>
+						<configuration>
+							<imageName>${project.artifactId}</imageName>
+							 The native image build needs to know the entry point to your 
+								application 
+							<mainClass>com.giljae.springnativeexample.SpringNativeExampleApplication</mainClass>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>native-image</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+			</plugin> -->
+
+
+
       <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

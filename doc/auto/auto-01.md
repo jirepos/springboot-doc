@@ -4,23 +4,32 @@
 
 ## dependency 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.4</version>
+		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jirepos</groupId>
-	<artifactId>autoconfig</artifactId>
+	<artifactId>springboot3-security6-doc</artifactId>
+	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>autoconfig</name>
-	<description>Demo project for Spring Boot</description>
+	<name>spring-security-doc</name>
+	<description>Demo Project for SpringBoot3.1, Spring Security 6.1.0 , SpringDoc </description>
 	<properties>
 		<java.version>17</java.version>
+		<spring-doc.version>2.1.0</spring-doc.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -32,6 +41,64 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Spring Security -->
+		<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency> -->
+
+			<!-- SpringBoot에서 JSP 사용설정  -->
+			<dependency>
+					<groupId>org.apache.tomcat.embed</groupId>
+					<artifactId>tomcat-embed-jasper</artifactId>
+					<scope>provided</scope>
+			</dependency>
+			<!-- war로 패키징 하는 경우 컴파일 시에 제공하고, 런타임 시에는 제공하지 않는다. -->
+			<!-- 내장 톰캣 -->
+			<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<scope>provided</scope>
+			</dependency>
+
+			<!-- mustache -->
+			<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-mustache</artifactId>
+			</dependency>
+
+			<dependency>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok</artifactId>
+					<version>1.18.26</version>
+					<scope>provided</scope>
+			</dependency>
+
+			<!-- SpringDoc -->
+			<dependency>
+					<groupId>org.springdoc</groupId>
+					<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+					<version>${spring-doc.version}</version>
+			</dependency>
+
+			<dependency>
+					<groupId>org.springdoc</groupId>
+					<artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+					<version>${spring-doc.version}</version>
+			</dependency>
+					
+			<!-- Runtime library -->
+			<dependency>
+					<groupId>com.github.therapi</groupId>
+					<artifactId>therapi-runtime-javadoc</artifactId>
+					<version>0.15.0</version>
+			</dependency>
+
 	</dependencies>
 
 	<build>
@@ -40,8 +107,24 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+      <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+						<annotationProcessorPaths>
+								<path>
+										<groupId>com.github.therapi</groupId>
+										<artifactId>therapi-runtime-javadoc-scribe</artifactId>
+										<version>0.15.0</version>
+								</path>
+						</annotationProcessorPaths>
+				</configuration>
+      </plugin>
 		</plugins>
 	</build>
+</project>
+
 ```
 
 

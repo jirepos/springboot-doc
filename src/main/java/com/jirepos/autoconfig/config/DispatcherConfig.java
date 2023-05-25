@@ -14,7 +14,6 @@ public class DispatcherConfig implements WebMvcConfigurer {
       configurer.enable();
     }
 
-
   /**
    * src/main/resources/public, src/main/resources/static 정적 리소스 폴더를 사용할 수 있도록 설정한다. 
    */
@@ -33,7 +32,5 @@ public class DispatcherConfig implements WebMvcConfigurer {
   //     resolver.setSuffix(""); 
   //     return resolver; 
   // }
-    
-
   
 }
