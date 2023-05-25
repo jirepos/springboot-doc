@@ -21,21 +21,18 @@ public class DispatcherConfig implements WebMvcConfigurer {
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     // url을 지정하여 실제 리소스 경로를 설정 
-    // registry.addResourceHandler("/public/**").addResourceLocations("classpath:/public/", "classpath:/static/");// .setCachePeriod(0);
-    // registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-    // registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     registry.addResourceHandler("/public/**").addResourceLocations("classpath:/public/");// .setCachePeriod(0);
     registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");// .setCachePeriod(0);
   }
   
-  @Bean 
-  public FreeMarkerViewResolver freemarkerViewResolver() { 
-      FreeMarkerViewResolver resolver = new FreeMarkerViewResolver(); 
-      resolver.setCache(true); 
-      resolver.setPrefix("classpath:/templates/mustache"); // 뷰의 위치
-      resolver.setSuffix(""); 
-      return resolver; 
-  }
+  // @Bean 
+  // public FreeMarkerViewResolver freemarkerViewResolver() { 
+  //     FreeMarkerViewResolver resolver = new FreeMarkerViewResolver(); 
+  //     resolver.setCache(true); 
+  //     resolver.setPrefix("classpath:/templates/mustache"); // 뷰의 위치
+  //     resolver.setSuffix(""); 
+  //     return resolver; 
+  // }
     
 
   

@@ -11,23 +11,23 @@ server:
 
 
 spring:
-  # mustache:
-  #   prefix: classpath:/templates/mustache/
-  #   suffix: 
+  mustache:
+    prefix: classpath:/templates/mustache/
+    suffix: 
 
-  freemarker:
-    suffix: .ftl
-    template-loader-path: classpath:/templates
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
-    static-path-pattern: /res/**   
-  web:
-    resources:
-      static-locations: 
-        - classpath:/static/ 
-        - classpath:/public/ 
+  # freemarker:
+  #   suffix: .ftl
+  #   template-loader-path: classpath:/templates
+  # mvc:
+  #   view:
+  #     prefix: /WEB-INF/views/
+  #     suffix: .jsp
+    # static-path-pattern: /res/**   
+  # web:
+  #   resources:
+      # static-locations: 
+      #   - classpath:/static/ 
+      #   - classpath:/public/ 
 
       #add-mappings: false
 
