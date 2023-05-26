@@ -195,6 +195,20 @@ public class SecurityConfig {
     );
   }//:
 
+
+  private void configOidc(HttpSecurity http) throws Exception {
+    // https://velog.io/@juhyeon1114/Spring-security%EC%99%80-OAuth2.-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC 
+
+    http.oauth2Login(oauth2 -> oauth2
+         .userInfoEndpoint( userInfo -> userInfo
+           // SpringSecurity 6.1에서는 메소드가 나눠짐 
+           .oidcUserService(null) // OIDC 사용자 서비스
+           .userService(null) // OAuth2 사용자 서비스
+         )
+    ); 
+  }
+
+
   /**
    * 인증 실패시 처리. filterChain()의 http.authorizeRequests()에서 인증정보가 없으면 여기서 처리한다.
    */

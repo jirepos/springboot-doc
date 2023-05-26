@@ -71,10 +71,10 @@ SpringBoot는 SpringMVC 6.0을 사용한다. SpringBoot 3에서 달라지는 점
   * Client OAuthLogin() 변경
     * OAUTH2_USER(OAuth2UserAuthority), OIDC_USER(OidcUserAuthority) 로 분리
   * SAML2 코드 Deprecated. 새로 개발 중. 
-
 * Tomcat 10, Jetty 11, Undertow 2.2.14 (undertow-servlet-jakarta도 포함)으로 업그레이드 필요
 * Commons FileUpload, Tiles, FreeMarker JSP support 같은 서블릿 기반 기능이 지원 종료
 * multipart file 업로드 혹은 FreeMarker template view는 StandardServletMultipartResolver 사용을 권장
+  * file upload 가이드 문서 : https://spring.io/guides/gs/uploading-files/
 * 이외에는 Rest 기반 웹 아키텍처 사용
 * Spring MVC와 Spring WebFlux에서 더 이상 type 레벨에서의 @RequestMapping을 자동 탐색하지 않음
 * interface의 경우에는 @RequestMapping을 붙여도 더 이상 탐색되지 않음
