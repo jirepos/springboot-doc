@@ -83,6 +83,7 @@ public class SecurityConfig {
     return http.build();
   }// :
 
+  /** Swagger URL  */
   private static final String[] SWAGGER_LIST = {
       // -- swagger ui
       "/swagger-resources/**",
@@ -92,8 +93,6 @@ public class SecurityConfig {
       "/v3/api-docs",
       "/webjars/**"
   };
-
-
   
   public static final String SPRING_DEFAULT_LOGIN_URL = "/login";
   public static final String SPRING_DEFAULT_LOGOUT_URL = "/logout";
@@ -104,6 +103,7 @@ public class SecurityConfig {
   public static final String SESSINO_EXPIRED_URL = "/session-expired";
   public static final String FORM_LOGIN_URL = "/formlogin";
   public static final String ROOT_URL = "/"; 
+  public static final String API_NO_AUTH_URL = "/api/v1/**";
 
 
   /** static 자원이외의 허용할 url */
@@ -112,6 +112,7 @@ public class SecurityConfig {
     ROOT_URL,            // "/" index page 
     FORM_LOGIN_URL,      // "formlogin",  // 폼로그인 
     LOGIN_FAIL_URL,      // "/loginfail", // 로그인 실패 페이지 
+    API_NO_AUTH_URL,     // "/api/v1/**", // 인증없이 접근가능한 API
     // -- Spring Security
     SPRING_DEFAULT_LOGIN_URL, //  "/login",      // 로그인 
     "/login/**"   , // /login/google, /login/azure 
@@ -132,8 +133,8 @@ public class SecurityConfig {
     this.authRequest(http);
     // this.disalbeFormLogin(http);
     // this.defaultFormLoginLogout(http);
-    // this.customFormLogin(http);
-    this.oidcLogin(http);
+    this.customFormLogin(http);
+    // this.oidcLogin(http);
     this.logout(http);
     this.headers(http);
     this.session(http);

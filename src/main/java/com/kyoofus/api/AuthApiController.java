@@ -18,11 +18,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 /** API 명세화 설명을 위한 Login Controller 클래스이다.  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v2")
 // Tag를 사용하여 LoginController의 API들을 login으로 묶어준다.
 @Tag(name ="login")
 public class AuthApiController {
-
 
   /** 간단한 사용방법을 예시하기 위한 메소드이다.  */
   @GetMapping("/get-user")
