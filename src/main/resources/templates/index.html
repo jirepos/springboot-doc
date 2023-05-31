@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpringBoot 3.1, Spring Security 6.1 가이드</title>
+</head>
+
+<body>
+  <h1>Spring Security 적용가이드</h1>
+  <h2>로그인 여부: <span th:text="${isLogin}"></span></h2>
+  <div>이 프로젝트는 SpringBoot3.1과 Spring Security 6.1을 사용하고 Spring Security를 적용한 가이드용 프로젝트이다.</div>
+  <ul>
+    <li><a href="/">Index 페이지</a> </li>
+    <li><a href="/formlogin">폼 로그인 </a> </li>
+    <li><a href="/login/google">구글로그인</a></li>
+    <li><a href="/login/azure">Azure Login</a></li>
+    <li><a href="/logout">로그아웃</a></li>
+  </ul>
+</body>
+</html>

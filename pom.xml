@@ -48,8 +48,6 @@
 				<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
 
-
-
 		<!-- https://mvnrepository.com/artifact/org.springframework.experimental/spring-aot-maven-plugin -->
 		<!-- <dependency>
 				<groupId>org.springframework.experimental</groupId>
@@ -78,11 +76,17 @@
 					<scope>provided</scope>
 			</dependency>
 
-			<!-- mustache -->
+      <!-- thymeleaf -->
 			<dependency>
 					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-mustache</artifactId>
+					<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			</dependency>
+
+			<!-- mustache -->
+			<!-- <dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-mustache</artifactId>
+			</dependency> -->
 
 			<dependency>
 					<groupId>org.projectlombok</groupId>
