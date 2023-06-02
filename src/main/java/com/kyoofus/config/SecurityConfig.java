@@ -32,8 +32,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-@EnableWebSecurity // Spring Security를 활성화 시킨다.
-@Configuration
+// @EnableWebSecurity // Spring Security를 활성화 시킨다.
+// @Configuration
 // final 필드에 대해 생성자를 만들어주는 lombok의 annotation.
 // 새로운 필드를 추가할 때 다시 생성자를 만드는 번거로움을 없앨 수 있다. ( @Autowired 사용하지 않고 의존성 주입 )
 @RequiredArgsConstructor
@@ -51,6 +51,7 @@ public class SecurityConfig {
   /** 로그인 성공 처리 핸들러 */
   private final AuthSuccessHandler authSuccessHandler;
 
+
   /** 정적자원 */
   private static final String[] STATIC_RESOURCES_WHITELIST = {
       "/static/**",
@@ -58,30 +59,6 @@ public class SecurityConfig {
       "/public/**"
   };
 
-  /**
-   * 패스워드를 암호화하기 위해서 사용한다. 동일한 방식으로 암호화를 해야 비교할 수 있다.
-   * UserDetailService를 구현한 클래스에 주입하기 위해서 @Bean으로 생성한다.
-   */
-  @Bean
-  PasswordEncoder passwordEncoder() {
-    // BCrypt가 가장 많이쓰이는 해싱 방법
-    // 패스워드 인크립트할 때 사용
-    return new BCryptPasswordEncoder();
-  }
-
-  @Bean
-  @Order(SecurityProperties.BASIC_AUTH_ORDER - 1)
-  /**
-   * 정적자원에 대한 보안규칙을 정의한다.
-   */
-  public SecurityFilterChain filterStaticResources(HttpSecurity http) throws Exception {
-    // 정적자원만 처리
-    http.securityMatcher(STATIC_RESOURCES_WHITELIST) // AUTH_STATIC_WHITELIST 에 설정한 URL 에서만 SpringSecurity 가 동작
-        .authorizeHttpRequests(auth -> auth
-            .anyRequest().permitAll() // 모든 접근 허용
-        );
-    return http.build();
-  }// :
 
   /** Swagger URL  */
   private static final String[] SWAGGER_LIST = {
@@ -112,7 +89,7 @@ public class SecurityConfig {
     ROOT_URL,            // "/" index page 
     FORM_LOGIN_URL,      // "formlogin",  // 폼로그인 
     LOGIN_FAIL_URL,      // "/loginfail", // 로그인 실패 페이지 
-    API_NO_AUTH_URL,     // "/api/v1/**", // 인증없이 접근가능한 API
+    // API_NO_AUTH_URL,     // "/api/v1/**", // 인증없이 접근가능한 API
     // -- Spring Security
     SPRING_DEFAULT_LOGIN_URL, //  "/login",      // 로그인 
     "/login/**"   , // /login/google, /login/azure 
@@ -121,19 +98,64 @@ public class SecurityConfig {
     SPRING_DEFAULT_LOGOUT_URL       // "/logout"        // 로그아웃 
   };
 
+  private static final String[] BAISC_AUTH_WHITELIST = { 
+    // --- this app 
+    "/app/public/**"
+  };
+
+  // -- FilterChain Section 
 
   @Bean
-  @Order(SecurityProperties.BASIC_AUTH_ORDER) // 순서가 filterStaticResources() 뒤에 오도록 순서를 지정해야 함
+  @Order(SecurityProperties.BASIC_AUTH_ORDER + 10 )
+  /** 정적자원에 대한 보안규칙을 정의한다.  */
+  public SecurityFilterChain filterFirstStaticResources(HttpSecurity http) throws Exception {
+    // 정적자원만 처리
+    http.securityMatcher(STATIC_RESOURCES_WHITELIST) // AUTH_STATIC_WHITELIST 에 설정한 URL 에서만 SpringSecurity 가 동작
+        .authorizeHttpRequests(auth -> auth
+            .anyRequest().permitAll() // 모든 접근 허용
+        );
+    return http.build();
+  }// :
+
+
+  @Bean
+  @Order(SecurityProperties.BASIC_AUTH_ORDER + 11) // 순서가 filterStaticResources() 뒤에 오도록 순서를 지정해야 함
+  /**  Basic 인증을 위한 보안규칙을 정의한다. */
+  public SecurityFilterChain filterSecondBasicAuth(HttpSecurity http) throws Exception {
+    http
+     .securityMatcher("/app/**") 
+     .authorizeHttpRequests(auth -> auth
+        .requestMatchers(BAISC_AUTH_WHITELIST).permitAll() // 인증하지 않는다.
+        .anyRequest().authenticated());
+    http.csrf(customizer -> customizer.disable()); // csrf 사용하지 않음
+    http.formLogin(formLoginCustomizer -> formLoginCustomizer
+        .disable() // form login 사용하지 않음
+    );    
+    // this.disalbeFormLogin(http);        
+    http.httpBasic(withDefaults());
+    return http.build();
+  }
+
+
+  @Bean
+  @Order(SecurityProperties.BASIC_AUTH_ORDER + 12 ) // 순서가 filterBasic() 뒤에 오도록 순서를 지정해야 함
   /**
    * 정적자원을 제외한 모든 요청에 대한 보안규칙을 정의한다.
    */
-  public SecurityFilterChain filterMain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain filterThirdMain(HttpSecurity http) throws Exception {
 
+    
+    // 권한 설정
+    http
+    .securityMatcher("/**") // filterStaticResources()에서 처리하지 않는 모든 URL에서 SpringSecurity가 동작
+    .authorizeHttpRequests(auth -> auth
+        // .requestMatchers(AUTH_WHITELIST).permitAll() // 인증하지 않는다.
+        .anyRequest().authenticated());
+        
     http.csrf(customizer -> customizer.disable()); // csrf 사용하지 않음
-    this.authRequest(http);
     // this.disalbeFormLogin(http);
-    // this.defaultFormLoginLogout(http);
-    this.customFormLogin(http);
+    this.defaultFormLoginLogout(http);
+    // this.customFormLogin(http);
     // this.oidcLogin(http);
     this.logout(http);
     this.headers(http);
@@ -143,14 +165,13 @@ public class SecurityConfig {
   }//:
  
 
-  /** 접근권한 설정 */
-  private void authRequest(HttpSecurity http) throws Exception {
-        // 권한 설정
-        http
-        .securityMatcher("/**", "") // filterStaticResources()에서 처리하지 않는 모든 URL에서 SpringSecurity가 동작
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers(AUTH_WHITELIST).permitAll() // 인증하지 않는다.
-            .anyRequest().authenticated());
+
+
+  // -- private method section
+  private void httpBasic(HttpSecurity http) throws Exception {
+    http.httpBasic(customizer -> customizer
+        .realmName("my-basic-realm") // 기본값 Spring Security
+        .authenticationEntryPoint(authenticationEntryPoint())); // 인증 실패시 401
   }
 
   /** 예외처리 핸들링 */
@@ -321,4 +342,17 @@ public class SecurityConfig {
       response.sendRedirect("/static/403.html");
     };
   }
+
+
+
+    /**
+   * 패스워드를 암호화하기 위해서 사용한다. 동일한 방식으로 암호화를 해야 비교할 수 있다.
+   * UserDetailService를 구현한 클래스에 주입하기 위해서 @Bean으로 생성한다.
+   */
+  @Bean
+  PasswordEncoder passwordEncoder() {
+    // BCrypt가 가장 많이쓰이는 해싱 방법
+    // 패스워드 인크립트할 때 사용
+    return new BCryptPasswordEncoder();
+  }  
 }/// ~

@@ -31,6 +31,10 @@ public class DefaultController {
       ModelAndView mav = new ModelAndView("loginfail");
       return mav ; 
     }
-
+    @GetMapping("/error")
+    public ModelAndView error() {
+      ModelAndView mav = new ModelAndView("error");
+      return mav ; 
+    }
 
 }///~

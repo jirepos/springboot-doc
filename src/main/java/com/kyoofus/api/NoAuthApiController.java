@@ -22,7 +22,6 @@ public class NoAuthApiController {
     return ResponseEntity.ok(userDto); 
   }
 
-
 }
 
 

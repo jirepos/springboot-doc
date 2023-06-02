@@ -32,6 +32,7 @@ public class AuthApiController {
     UserDto dto = new UserDto();
     dto.setUserId("123");
     dto.setUserName("John Doe");
+
     return ResponseEntity.ok(dto);
   }// :
 
