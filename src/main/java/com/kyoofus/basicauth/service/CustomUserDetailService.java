@@ -17,8 +17,8 @@ import lombok.RequiredArgsConstructor;
  * 스프링 시큐리티에서 Form Login 사용 시 사용자 인증 서비스이다. 
  */
 // UserDetailsService를 구현해야 한다. 
-//@Service
-//@RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService  {
 
     /** 패스워드 인코더 */
