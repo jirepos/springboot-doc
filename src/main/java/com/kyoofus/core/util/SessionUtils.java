@@ -7,6 +7,9 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 
+/**
+ * 세션 유틸리티 클래스이다.
+ */
 public class SessionUtils {
 
   /** 사용자의 로그인 여부를 확인한다.  */

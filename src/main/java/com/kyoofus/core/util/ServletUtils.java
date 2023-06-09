@@ -3,24 +3,17 @@ package com.kyoofus.core.util;
 
 // 새로운 스프링 부트 3.0 는 Java17 을 기반으로 작성된 새로운 프레임 워크입니다.
 
-import java.util.Optional;
-// SpingBoot 3에서 Jakarta EE의 jakarta.* 로 변경이 되었다. 
-// import javax.servlet.http.HttpServletRequest;
-// import javax.servlet.http.HttpServletResponse;
-// import javax.validation.constraints.NotNull;
-
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-// Spring framework 6와 Spring Boot 3 가 릴리즈 되었습니다.
-// SpingBoot 3에서 Jakarta EE의 jakarta.* 로 변경이 되었다. 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.constraints.NotNull;
+import java.util.Optional;
 
 /**
- * Servlet 처리할 때 사용할 편리한 기능을 제공합니다.
+ * Servlet 처리할 때 사용할 편리한 기능을 제공한다.
  */
 public class ServletUtils {
     
