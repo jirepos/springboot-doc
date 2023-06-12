@@ -1,4 +1,4 @@
-package com.kyoofus.security.config;
+package com.kyoofus.security.config.test;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;

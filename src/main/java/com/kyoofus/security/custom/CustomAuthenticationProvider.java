@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 /** 커스텀 인증을 처리하기 위한 Provider */
 @Component
-public class CustomSecurityProvider implements AuthenticationProvider {
+public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    public CustomSecurityProvider() {}
+    public CustomAuthenticationProvider() {}
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();

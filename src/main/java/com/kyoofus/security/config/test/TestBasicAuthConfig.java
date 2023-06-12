@@ -1,4 +1,4 @@
-package com.kyoofus.security.config;
+package com.kyoofus.security.config.test;
 
 import com.kyoofus.security.basicauth.auth.CustomBasicAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;

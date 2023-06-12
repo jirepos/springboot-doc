@@ -1,19 +1,24 @@
 package com.kyoofus.security.formlogin.service;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 /**
  * 스프링 시큐리티에서 Form Login 사용 시 사용자 인증 서비스이다. 
  */
 // UserDetailsService를 구현해야 한다. 
-// @Service
-//@RequiredArgsConstructor
-public class FormLoginUserDetailServiceImpl implements UserDetailsService  {
+@Service
+@RequiredArgsConstructor
+public class CustomUserDetailsService implements UserDetailsService  {
 
     /** 패스워드 인코더 */
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 //    private final PasswordEncoder passwordEncoder;
     // 실제 개발에서는 사용자를 조회할 Repository를 선언해야 한다. 
     // (1) private final UserRepository userRepository;

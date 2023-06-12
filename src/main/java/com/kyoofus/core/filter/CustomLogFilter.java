@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -15,6 +16,7 @@ import java.io.IOException;
  */
 @Component
 @RequiredArgsConstructor
+@Order(-109)
 public class CustomLogFilter extends GenericFilterBean {
     // GenericFilterBean을 상속 받으면 Spring Bean을 주입받아 쓸 수 있다.
     private final TestCustomLogger testCustomLogger;
